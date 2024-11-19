@@ -276,28 +276,37 @@
             <div class="card-body px-0 pt-0 pb-2">
 
 
-        {% block show %}
-            <h2>Existing Foyers</h2>
-            <ul>
-                {% for foyer in foyers %}
-                    <li>
-                        <strong>Nom:</strong> {{ foyer.nom }} | 
-                        <strong>Adresse:</strong> {{ foyer.adresse }}
-                        <a href="{{ path('app_tables_show', { id: foyer.id }) }}">View Details</a>
-                    </li>
-                {% endfor %}
-            </ul>
+{% block show %}
+    <h2>Existing Foyers</h2>
+    <ul>
+        {% for foyer in foyers %}
+            <li>
+                <strong>Nom:</strong> {{ foyer.nom }} | 
+                <strong>Adresse:</strong> {{ foyer.adresse }}
 
-            {% if foyer is defined and chambres is defined %}
-                <h2>Details for Foyer: {{ foyer.nom }}</h2>
-                <h3>Chambres:</h3>
-                <ul>
-                    {% for chambre in chambres %}
-                        <li>Numero: {{ chambre.numero }} | Capacité: {{ chambre.capacite }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        {% endblock %}
+                <!-- Edit Button -->
+                <a href="{{ path('app_tables_edit', {'id': foyer.id}) }}" class="btn btn-primary">Edit</a>
+
+                <!-- Delete form -->
+                <form action="{{ path('foyer_delete', {'id': foyer.id}) }}" method="POST" style="display:inline;">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ foyer.id) }}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if foyer is defined and chambres is defined %}
+        <h2>Details for Foyer: {{ foyer.nom }}</h2>
+        <h3>Chambres:</h3>
+        <ul>
+            {% for chambre in chambres %}
+                <li>Numero: {{ chambre.numero }} | Capacité: {{ chambre.capacite }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
+
 
 
             </div>

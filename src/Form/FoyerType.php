@@ -23,7 +23,7 @@ class FoyerType extends AbstractType
                 'required' => true,
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Create Foyer'
+                'label' => 'Save'
             ]);
     }
 

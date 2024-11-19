@@ -1,0 +1,24 @@
+
+{% block title %}Foyer Details{% endblock %}
+
+{% block body %}
+    <h1>Foyer Details</h1>
+    <p><strong>Nom:</strong> {{ foyer.nom }}</p>
+    <p><strong>Adresse:</strong> {{ foyer.adresse }}</p>
+
+    <h3>Chambres:</h3>
+    <ul>
+        {% for chambre in foyer.chambres %}
+            <li>Numero: {{ chambre.numero }} | Capacité: {{ chambre.capacite }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Residents:</h3>
+    <ul>
+        {% for resident in foyer.residents %}
+            <li>{{ resident.nom }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('foyer_index') }}">Foyer Index</a>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% block title %}Chambres{% endblock %}
+
+{% block body %}
+    <h1>Chambres</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Numéro</th>
+                <th>Capacité</th>
+                <th>Foyer</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for chambre in chambres %}
+                <tr>
+                    <td>{{ chambre.numero }}</td>
+                    <td>{{ chambre.capacite }}</td>
+                    <td>{{ chambre.foyer.nom }}</td>
+                    <td>
+                        <a href="{{ path('chambre_show', {'id': chambre.id}) }}">Voir</a>
+                        <a href="{{ path('chambre_edit', {'id': chambre.id}) }}">Edit</a>
+                        <form method="POST" action="{{ path('chambre_delete', {'id': chambre.id}) }}" style="display:inline-block;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ chambre.id) }}">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('chambre_new') }}">Create a new Chambre</a>
+{% endblock %}

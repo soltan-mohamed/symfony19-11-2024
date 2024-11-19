@@ -1,0 +1,14 @@
+{% block title %}New Chambre{% endblock %}
+
+{% block body %}
+    <h1>Create New Chambre</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.numero) }}
+        {{ form_row(form.capacite) }}
+        {{ form_row(form.foyer) }}
+        <button type="submit" class="btn">Save</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('chambre_index') }}">Back to Chambres list</a>
+{% endblock %}

@@ -1,0 +1,22 @@
+
+{% block body %}
+    <h1>Chambre Details</h1>
+
+    <table>
+        <tr>
+            <th>Numéro</th>
+            <td>{{ chambre.numero }}</td>
+        </tr>
+        <tr>
+            <th>Capacité</th>
+            <td>{{ chambre.capacite }}</td>
+        </tr>
+        <tr>
+            <th>Foyer</th>
+            <td>{{ chambre.foyer.nom }}</td>
+        </tr>
+    </table>
+
+    <a href="{{ path('chambre_edit', {'id': chambre.id}) }}">Edit</a>
+    <a href="{{ path('chambre_index') }}">Back to Chambres list</a>
+{% endblock %}

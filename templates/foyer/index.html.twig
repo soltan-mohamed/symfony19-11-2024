@@ -1,0 +1,33 @@
+
+{% block title %}Foyers{% endblock %}
+
+{% block body %}
+    <h1>Foyers</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for foyer in foyers %}
+                <tr>
+                    <td>{{ foyer.nom }}</td>
+                    <td>{{ foyer.adresse }}</td>
+                    <td>
+                        <a href="{{ path('foyer_show', {'id': foyer.id}) }}">Voir</a>
+                        <a href="{{ path('foyer_edit', {'id': foyer.id}) }}">Edit</a>
+                        
+                        <form action="{{ path('foyer_delete', {'id': foyer.id}) }}" method="POST" style="display:inline;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ foyer.id) }}">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

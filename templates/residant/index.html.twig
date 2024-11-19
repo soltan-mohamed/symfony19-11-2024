@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Résidents{% endblock %}
+
+{% block body %}
+<h1>Liste des Résidents</h1>
+
+<a href="{{ path('resident_new') }}">Ajouter un nouveau résident</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Foyer</th>
+            <th>Date d'entrée</th>
+            <th>Date de sortie</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for resident in residents %}
+            <tr>
+                <td>{{ resident.id }}</td>
+                <td>{{ resident.nom }} {{ resident.prenom }}</td>
+                <td>{{ resident.foyer.nom }}</td>
+                <td>{{ resident.dateEntree ? resident.dateEntree|date('d/m/Y') : 'N/A' }}</td>
+                <td>{{ resident.dateSortie ? resident.dateSortie|date('d/m/Y') : 'N/A' }}</td>
+                <td>
+                    <a href="{{ path('resident_show', {'id': resident.id}) }}">Voir</a>
+                    <a href="{{ path('resident_edit', {'id': resident.id}) }}">Modifier</a>
+                    <form method="post" action="{{ path('resident_delete', {'id': resident.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce résident ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ resident.id) }}">
+                        <button type="submit">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+

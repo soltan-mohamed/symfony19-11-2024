@@ -1,0 +1,17 @@
+{# templates/foyer/edit.html.twig #}
+
+
+{% block title %}Edit Foyer{% endblock %}
+
+{% block body %}
+    <h1>Edit Foyer</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.adresse) }}
+        <button class="btn">Save changes</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('foyer_index') }}">Back to the list</a>
+{% endblock %}
+

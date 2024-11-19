@@ -1,0 +1,13 @@
+
+
+{% block title %}Create a New Foyer{% endblock %}
+
+{% block body %}
+    <h1>Create a New Foyer</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.adresse) }}
+        {{ form_row(form.save) }}
+    {{ form_end(form) }}
+{% endblock %}

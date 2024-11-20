@@ -26,11 +26,8 @@ class ChambreType extends AbstractType
                 },
                 'placeholder' => 'Choose a foyer',
                 'required' => true,
-            ])
-            ->add('save', SubmitType::class, [
-                'label' => 'Create Foyer'
             ]);
-        ;
+        
     }
 
     public function configureOptions(OptionsResolver $resolver)

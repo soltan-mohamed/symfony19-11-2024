@@ -69,4 +69,9 @@ class Foyer
     {
         return $this->residents;
     }
+
+    public function __toString(): string
+    {
+        return $this->getNom(); // Use the "nom" property as the string representation
+    }
 }

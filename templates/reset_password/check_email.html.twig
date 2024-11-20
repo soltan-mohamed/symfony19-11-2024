@@ -33,25 +33,25 @@
           <li class="nav-item">
             <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href={{path('dashboard')}}>
               <i class="fa fa-chart-pie opacity-6  me-1"></i>
-              Dashboard
+              Tableau de bord
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link me-2" href={{path('app_profile')}}>
               <i class="fa fa-user opacity-6  me-1"></i>
-              Profile
+              Profil
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link me-2" href={{path('app_sign_up')}}>
               <i class="fas fa-user-circle opacity-6  me-1"></i>
-              Sign Up
+              Si'inscrire
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link me-2" href={{path('app_sign_in')}}>
               <i class="fas fa-key opacity-6  me-1"></i>
-              Sign In
+              Se connecter
             </a>
           </li>
         </ul>
@@ -69,8 +69,6 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-5 text-center mx-auto">
-            <h1 class="text-white mb-2 mt-5">Welcome!</h1>
-            <p class="text-lead text-white">Use these awesome forms to login or create new account in your project for free.</p>
           </div>
         </div>
       </div>
@@ -90,14 +88,13 @@
 {% block body %}
         
 <div class="container mt-5">
-    <h1 class="text-center mb-4">Password Reset Email Sent</h1>
+    <h1 class="text-center mb-4">E-mail de réinitialisation du mot de passe envoyé</h1>
                             <p class="mb-0">
-                                If an account matching your email exists, an email has been sent with a link to reset your password.
-                                This link will expire in 
+                                Si un compte correspondant à votre e-mail existe, un e-mail a été envoyé avec un lien pour réinitialiser votre mot de passe. Ce lien expirera dans
                                 {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
                             </p>
                             <p class="mb-0">
-<a href="{{ path('app_forgot_password_request') }}" class="text-decoration-none" style="font-weight: bold; color: #344767;">try again</a>.
+<a href="{{ path('app_forgot_password_request') }}" class="text-decoration-none" style="font-weight: bold; color: #344767;">réessayer</a>.
                             </p>
                         </div>
                     </div>

@@ -15,7 +15,7 @@ class FoyerType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-                'label' => 'Foyer Name',
+                'label' => 'Nom du Foyer',
                 'required' => true,
             ])
             ->add('adresse', TextType::class, [ 
@@ -23,7 +23,7 @@ class FoyerType extends AbstractType
                 'required' => true,
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Save'
+                'label' => 'Enregistrer'
             ]);
     }
 

@@ -17,14 +17,20 @@ class ChambreType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('numero', TextType::class)
-            ->add('capacite', IntegerType::class)
+            ->add('numero', TextType::class, [
+                'label' => 'Numéro du chambre',
+                'required' => true,
+            ])
+            ->add('capacite', IntegerType::class, [
+                'label' => 'Capacité du chambre',
+                'required' => true,
+            ])
             ->add('foyer', ChoiceType::class, [
                 'choices' => $this->getFoyerChoices($options['foyers']),
                 'choice_label' => function (Foyer $foyer) {
                     return $foyer->getNom();
                 },
-                'placeholder' => 'Choose a foyer',
+                'placeholder' => 'Choisissez un foyer',
                 'required' => true,
             ]);
         

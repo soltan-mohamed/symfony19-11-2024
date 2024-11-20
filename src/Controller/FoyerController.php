@@ -37,8 +37,8 @@ class FoyerController extends AbstractController
             $entityManager->flush();
 
             return $this->render('foyer/new.html.twig', [
-                'foyer' => $foyer, // Pass the created foyer to the template
-                'form' => $form,   // Pass the form to the template (in case of re-rendering)
+                'foyer' => $foyer,
+                'form' => $form, 
             ]);        
         }
 

@@ -75,59 +75,69 @@
   <main class="main-content  mt-0">
     <section>
       <div class="page-header min-vh-100">
-        <div class="container">
+        <div class="container" style="width: 150%;">
           <div class="row">
             <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
               <div class="card card-plain">
                 <div class="card-header pb-0 text-start">
-                  <h4 class="font-weight-bolder">Se connecter</h4>
-                  <p class="mb-0">Entrez votre e-mail et votre mot de passe pour vous connecter</p>
+
+                                    {% block body %}
+                                            <div class="container mt-4" style="width: 230%;" >
+                                                 <h2 class="text-center text-primary mb-4">
+                                                    <i class="bi bi-house-door"></i> Foyers et Chambres Existants
+                                                </h2>
+                                        {% for foyer in foyers %}
+
+                                            <div class="card mb-4 shadow-lg border-primary" >
+                                                <div class="card-header" style="background-color: #f8f9fa; color: #343a40;" d-flex flex-column align-items-start">
+                                                    <h4 class="mb-0" style="color:black;">{{ foyer.nom }}</h4>
+                                                    <h6 class="mb-0">{{ foyer.adresse }}</h6><br>
+                                                    <p class="mb-0"><strong>Genre:</strong> {{ foyer.genre }}</p>
+                                                    <p class="mb-0"><strong>Gouvernorat:</strong> {{ foyer.gouvernorat }}</p>
+                                                    <p class="mb-0"><strong>Capacité:</strong> {{ foyer.capacite }}</p>
+                                                </div>
+
+                                                <div class="card-body">
+                                                    <h5 class="text-secondary mb-3">Chambres</h5>
+            
+                                                    <table class="table table-striped table-hover table-bordered">
+                                                        <thead class="thead-light">
+                                                            <tr>
+                                                                <th>Numéro</th>
+                                                                <th>Capacité</th>
+                                                                <th>État</th>
+                                                                <th>Type de Lit</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                            {% for chambre in foyer.chambres %}
+                                                                <tr>
+                                                                    <td class="align-middle">{{ chambre.numero }}</td>
+                                                                    <td class="align-middle">{{ chambre.capacite }}</td>
+                                                                    <td class="align-middle">{{ chambre.etat }}</td>
+                                                                    <td class="align-middle">{{ chambre.typeLit }}</td>
+                                                                </tr>
+                                                            {% else %}
+                                                                <tr>
+                                                                    <td colspan="4" class="text-center text-muted">Aucune chambre disponible pour ce foyer.</td>
+                                                                </tr>
+                                                            {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            {% else %}
+                                                <p class="text-muted">Aucun foyer ni chambre disponible.</p>
+                                            {% endfor %}
+                                    {% endblock %}
+
                 </div>
-{% block body %}
-    <div class="card-body">
-      <div class="container mt-5">
-          <form method="post">
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
-
-            {% if app.user %}
-                <div class="mb-3">
-                    Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
-                </div>
-            {% endif %}
-                <h1 class="h3 mb-3 font-weight-normal">Veuillez vous connecter</h1>
-                <div class="mb-3">
-                  <label for="inputEmail">E-mail</label>
-                  <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-                </div>
-
-                <div class="mb-3">
-                  <label for="inputPassword">Mot de passe</label>
-                  <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-                  <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-                </div>
-                  <button class="btn btn-lg btn-primary" type="submit">Se connecter</button>
-          </form>
-      </div>
-    </div>
-{% endblock %}
-                
-                <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                  <p class="mb-4 text-sm mx-auto">
-                    Mot de passe oublié?
-                    <a href="{{ path('app_forgot_password_request') }}" class="text-primary text-gradient font-weight-bold">Réinitialiser le mot de passe</a>
-                  </p>
-
-                </div>
-
-
-
-
-
-              </div>
             </div>
+        </div>
+    </div>
+</div>
+</div>
             <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
               <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg');
           background-size: cover;">

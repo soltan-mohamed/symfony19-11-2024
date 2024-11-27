@@ -2,17 +2,26 @@
 
 namespace App\Controller;
 
+use App\Repository\FoyerRepository;
+use App\Repository\ChambreRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 class UtilisateurController extends AbstractController
 {
     #[Route('/utilisateur', name: 'app_utilisateur')]
-    public function index(): Response
+    public function index(FoyerRepository $foyerRepository, ChambreRepository $chambreRepository): Response
     {
-        return $this->render('utilisateur/index.html.twig', [
-            'controller_name' => 'UtilisateurController',
+        $foyers = $foyerRepository->findAll();
+
+        $chambres = $chambreRepository->findAll();
+
+        return $this->render('utilisateur.html.twig', [
+            'foyers' => $foyers,
+            'chambres' => $chambres,
         ]);
     }
 }
+
+

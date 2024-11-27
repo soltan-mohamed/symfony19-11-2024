@@ -190,9 +190,12 @@
 
     {% for foyer in foyers %}
     <div class="card mb-4 shadow-lg border-primary">
-<div class="card-header" style="background-color: #f8f9fa; color: #343a40;" d-flex flex-column align-items-start">
-            <h4 class="mb-0" style="color:black";>{{ foyer.nom }}</h4>
-            <h6 class="mb-0">{{ foyer.adresse }}</h6>
+        <div class="card-header" style="background-color: #f8f9fa; color: #343a40;" d-flex flex-column align-items-start">
+            <h4 class="mb-0" style="color:black;">{{ foyer.nom }}</h4>
+            <h6 class="mb-0">{{ foyer.adresse }}</h6><br>
+            <p class="mb-0"><strong>Genre:</strong> {{ foyer.genre }}</p>
+            <p class="mb-0"><strong>Gouvernorat:</strong> {{ foyer.gouvernorat }}</p>
+            <p class="mb-0"><strong>Capacité:</strong> {{ foyer.capacite }}</p>
         </div>
         <div class="card-body">
             <!-- Titre des chambres -->
@@ -204,6 +207,8 @@
                     <tr>
                         <th>Numéro</th>
                         <th>Capacité</th>
+                        <th>État</th>
+                        <th>Type de Lit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -211,23 +216,27 @@
                     <tr>
                         <td class="align-middle">{{ chambre.numero }}</td>
                         <td class="align-middle">{{ chambre.capacite }}</td>
+                        <!-- Affichage de l'état de la chambre -->
+                        <td class="align-middle">{{ chambre.etat }}</td>
+                        <!-- Affichage du type de lit -->
+                        <td class="align-middle">{{ chambre.typeLit }}</td>
                     </tr>
                     {% else %}
                     <tr>
-                        <td colspan="2" class="text-center text-muted">Aucune chambre disponible pour ce foyer.</td>
+                        <td colspan="4" class="text-center text-muted">Aucune chambre disponible pour ce foyer.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
-
-
     </div>
     {% else %}
     <p class="text-muted">Aucun foyer ni chambre disponible.</p>
     {% endfor %}
 </div>
 {% endblock %}
+
+
 
             
           </div>

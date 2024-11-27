@@ -19,12 +19,20 @@ class Chambre
     #[ORM\Column(type: 'string', length: 50)]
     private $numero;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: "integer")]
+    #[Assert\NotNull(message: "La capacité ne peut pas être nulle.")]
+    #[Assert\GreaterThan(value: 0, message: "La capacité doit être supérieure à 0.")]
     private $capacite;
 
     #[ORM\ManyToOne(targetEntity: Foyer::class, inversedBy: 'chambres')]
     #[ORM\JoinColumn(nullable: false)]
     private $foyer;
+
+    #[ORM\Column(type: 'string', length: 10)]
+    private $etat;
+
+    #[ORM\Column(type: 'string', length: 20)]
+    private $typeLit;
 
     public function getId(): ?int
     {
@@ -63,6 +71,30 @@ class Chambre
     public function setFoyer(?Foyer $foyer): self
     {
         $this->foyer = $foyer;
+
+        return $this;
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(string $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getTypeLit(): ?string
+    {
+        return $this->typeLit;
+    }
+
+    public function setTypeLit(string $typeLit): self
+    {
+        $this->typeLit = $typeLit;
 
         return $this;
     }

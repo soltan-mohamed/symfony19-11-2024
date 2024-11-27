@@ -15,7 +15,7 @@ class Foyer
     #[ORM\Column(type: "integer")]
     private $id;
 
-    #[ORM\Column(type: "string", length: 100)]
+    #[ORM\Column(type: "string", length: 70)]
     private $nom;
 
     #[ORM\Column(type: "string", length: 255)]
@@ -26,6 +26,17 @@ class Foyer
 
     #[ORM\OneToMany(mappedBy: "foyer", targetEntity: Resident::class)]
     private $residents;
+
+    #[ORM\Column(type: "string", length: 10)]
+    private $genre;
+
+    #[ORM\Column(type: "string", length: 50)]
+    private $gouvernorat;
+
+    #[ORM\Column(type: "integer")]
+    #[Assert\NotNull(message: "La capacité ne peut pas être nulle.")]
+    #[Assert\GreaterThan(value: 0, message: "La capacité doit être supérieure à 0.")]
+    private $capacite;
 
     public function __construct()
     {
@@ -70,8 +81,41 @@ class Foyer
         return $this->residents;
     }
 
+    public function getGenre(): ?string
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(string $genre): self
+    {
+        $this->genre = $genre;
+        return $this;
+    }
+
+    public function getGouvernorat(): ?string
+    {
+        return $this->gouvernorat;
+    }
+
+    public function setGouvernorat(string $gouvernorat): self
+    {
+        $this->gouvernorat = $gouvernorat;
+        return $this;
+    }
+
+    public function getCapacite(): ?int
+    {
+        return $this->capacite;
+    }
+
+    public function setCapacite(int $capacite): self
+    {
+        $this->capacite = $capacite;
+        return $this;
+    }
+
     public function __toString(): string
     {
-        return $this->getNom(); // Use the "nom" property as the string representation
+        return $this->getNom();
     }
 }

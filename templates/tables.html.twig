@@ -199,23 +199,48 @@
 
         <div class="card-body">
           {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+
           <div class="mb-3">
             {{ form_row(form.nom, {
               'label_attr': {'class': 'form-label fw-bold'},
               'attr': {'class': 'form-control'}
             }) }}
           </div>
+
           <div class="mb-3">
             {{ form_row(form.adresse, {
               'label_attr': {'class': 'form-label fw-bold'},
               'attr': {'class': 'form-control'}
             }) }}
           </div>
+
+          <div class="mb-3">
+            {{ form_row(form.genre, {
+              'label_attr': {'class': 'form-label fw-bold'},
+              'attr': {'class': 'form-check'}
+            }) }}
+          </div>
+
+          <div class="mb-3">
+            {{ form_row(form.gouvernorat, {
+              'label_attr': {'class': 'form-label fw-bold'},
+              'attr': {'class': 'form-control'}
+            }) }}
+          </div>
+
+          <div class="mb-3">
+            {{ form_row(form.capacite, {
+              'label_attr': {'class': 'form-label fw-bold'},
+              'attr': {'class': 'form-control'}
+            }) }}
+          </div>
+
           <div class="text-center">
             {{ form_row(form.save, {
               'attr': {'class': 'btn btn-success btn-lg'}
             }) }}
           </div>
+
           {{ form_end(form) }}
         </div>
       </div>
@@ -223,6 +248,7 @@
   </div>
 </div>
 {% endblock %}
+
 
 
 
@@ -251,6 +277,9 @@
                 <div>
                     <p class="mb-0"><strong>Nom :</strong> {{ foyer.nom }}</p>
                     <p class="mb-0"><strong>Adresse :</strong> {{ foyer.adresse }}</p>
+                    <p class="mb-0"><strong>Genre :</strong> {{ foyer.genre }}</p>
+                    <p class="mb-0"><strong>Gouvernorat :</strong> {{ foyer.gouvernorat }}</p>
+                    <p class="mb-0"><strong>Capacité :</strong> {{ foyer.capacite }}</p>
                 </div>
 
                 <div class="d-flex">
@@ -287,6 +316,7 @@
     {% endif %}
 </div>
 {% endblock %}
+
 
 
 

@@ -14,4 +14,16 @@ class FoyerRepository extends ServiceEntityRepository
         parent::__construct($registry, Foyer::class);
     }
 
+    public function searchByName(?string $nom): array
+    {
+        $qb = $this->createQueryBuilder('f');
+    
+        if ($nom && $nom !== '') { // Vérifie si $nom n'est pas null ou vide
+            $qb->where('f.nom LIKE :nom')
+               ->setParameter('nom', '%' . $nom . '%');
+        }
+    
+        return $qb->getQuery()->getResult();
+    }
+
 }

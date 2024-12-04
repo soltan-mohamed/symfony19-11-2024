@@ -16,22 +16,25 @@ class TablesController extends AbstractController
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         $foyer = new Foyer();
-        
         $form = $this->createForm(FoyerType::class, $foyer);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($foyer);
             $entityManager->flush();
-
+    
             return $this->redirectToRoute('app_tables');
         }
-
-        $foyers = $entityManager->getRepository(Foyer::class)->findAll();
-
+    
+        $searchTerm = $request->query->get('search', ''); // Récupère la valeur du champ de recherche
+        $foyers = $searchTerm 
+            ? $entityManager->getRepository(Foyer::class)->searchByName($searchTerm) 
+            : $entityManager->getRepository(Foyer::class)->findAll();
+    
         return $this->render('tables.html.twig', [
             'form' => $form->createView(),
             'foyers' => $foyers,
+            'searchTerm' => $searchTerm, // Pour réafficher la recherche
         ]);
     }
 

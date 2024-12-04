@@ -14,4 +14,16 @@ class ChambreRepository extends ServiceEntityRepository
         parent::__construct($registry, Chambre::class);
     }
 
+    public function searchByNumero(?string $numero): array
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        if ($numero) {
+            $qb->where('c.numero LIKE :numero')
+               ->setParameter('numero', '%' . $numero . '%');
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
 }

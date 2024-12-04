@@ -20,12 +20,15 @@ class TestController extends AbstractController
     #[Route('/test', name: 'app_test')]
     public function index(Request $request, ChambreRepository $chambreRepository, EntityManagerInterface $entityManager): Response
     {
-        $chambres = $chambreRepository->findAll();
+        $searchTerm = $request->query->get('search'); // Récupérer le terme de recherche
+    
+        // Utiliser la méthode du repository pour effectuer la recherche
+        $chambres = $chambreRepository->searchByNumero($searchTerm);
+    
         $chambre = new Chambre();
         $foyers = $entityManager->getRepository(Foyer::class)->findAll();
         $form = $this->createForm(ChambreType::class, $chambre, [
             'foyers' => $foyers,
-
         ]);
         $form->handleRequest($request);
     
@@ -38,6 +41,7 @@ class TestController extends AbstractController
         return $this->render('billing.html.twig', [
             'chambres' => $chambres,
             'form' => $form->createView(),
+            'searchTerm' => $searchTerm, // Passer le terme de recherche au template
         ]);
     }
 

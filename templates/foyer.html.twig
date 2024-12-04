@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foyers et Chambres</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Liste des Foyers et Chambres</h1>
+    {% for foyer in foyers %}
+        <h2>Foyer: {{ foyer.nom }}</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Numéro de la Chambre</th>
+                    <th>Capacité de la chambre</th>
+                    <th>Etat de la chambre</th>
+                    <th>Type de lit dans la chambre</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for chambre in foyer.chambres %}
+                    <tr>
+                        <td>{{ chambre.numero }}</td>
+                        <td>{{ chambre.capacite }}</td>
+                        <td>{{ chambre.etat }}</td>
+                        <td>{{ chambre.typeLit }}</td>
+
+
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">Aucune chambre trouvée pour ce foyer.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Aucun foyer trouvé.</p>
+    {% endfor %}
+</body>
+</html>

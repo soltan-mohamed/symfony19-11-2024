@@ -193,6 +193,8 @@
     <h2 class="text-center text-primary mb-4">
         <i class="bi bi-house-door"></i> Foyers et Chambres Existants
     </h2>
+    <a href="{{ path('dashboard_export_pdf') }}" class="btn btn-danger">Exporter en PDF</a>
+
 
     {% for foyer in foyers %}
     <div class="card mb-4 shadow-lg border-primary">

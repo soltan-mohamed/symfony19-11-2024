@@ -7,7 +7,10 @@ use App\Repository\ChambreRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-
+use App\Entity\Foyer;
+use Doctrine\ORM\EntityManagerInterface;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractController
@@ -15,25 +18,45 @@ class DashboardController extends AbstractController
     #[Route('/dashboard', name: 'dashboard')]
     public function index(Request $request, FoyerRepository $foyerRepository, ChambreRepository $chambreRepository): Response
     {
-        // Récupérer le terme de recherche à partir de la requête GET
         $searchTerm = $request->query->get('search', '');
     
-        // Rechercher les foyers en fonction du terme, ou afficher tous les foyers si aucun terme n'est fourni
         if ($searchTerm !== '') {
             $foyers = $foyerRepository->searchByName($searchTerm);
         } else {
             $foyers = $foyerRepository->findAll();
         }
     
-        // Récupérer toutes les chambres (facultatif)
         $chambres = $chambreRepository->findAll();
     
         return $this->render('dashboard.html.twig', [
             'foyers' => $foyers,
             'chambres' => $chambres,
-            'searchTerm' => $searchTerm, // Pour préremplir le champ de recherche
+            'searchTerm' => $searchTerm,
         ]);
     }
+
+    #[Route('/dashboard/export/pdf', name: 'dashboard_export_pdf')]
+    public function exportPdf(EntityManagerInterface $entityManager): Response
+    {
+        $foyers = $entityManager->getRepository(Foyer::class)->findAll();
+    
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $dompdf = new Dompdf($options);
+    
+        $html = $this->renderView('foyer.html.twig', [
+            'foyers' => $foyers,
+        ]);
+    
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'landscape');
+        $dompdf->render();
+        $dompdf->stream("Liste_Foyers_Chambres.pdf", ["Attachment" => true]);
+    
+        return new Response();
+    }
+    
 }
 
 

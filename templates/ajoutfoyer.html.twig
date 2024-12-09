@@ -52,7 +52,7 @@
           </a>
         </li>
 
-                        <li class="nav-item">
+                <li class="nav-item">
           <a class="nav-link active " href={{path('app_create_foyer')}}>
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="bi bi-building text-dark text-sm opacity-10"></i>
@@ -106,14 +106,7 @@
 
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-<form method="get" action="{{ path('app_tables') }}" class="mb-4">
-    <div class="input-group">
-        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-        <input type="text" class="form-control" placeholder="tapez ici..." 
-               name="search" value="{{ searchTerm|default('') }}">
-        <button type="submit" class="btn btn-primary">Rechercher</button>
-    </div>
-</form>
+
 
 
           </div>
@@ -193,7 +186,7 @@
         <div class="col-12">
           <div class="card mb-4">
 
-            <!--<div class="card-body px-0 pt-0 pb-2">
+            <div class="card-body px-0 pt-0 pb-2">
 
 
 
@@ -268,8 +261,8 @@
             
           </div>
         </div>
-      </div>-->
-      <div class="row">
+      </div>
+    <!--  <div class="row">
         <div class="col-12">
           <div class="card mb-4">
 
@@ -281,11 +274,6 @@
     <h2 class="text-center text-primary mb-4">
         <i class="bi bi-house-door"></i> Foyers Existants
     </h2>
-                        <button type="submit" class="btn btn-add">
-                      <h5>  <a href="{{ path('app_create_foyer') }}" style="color: green;">
-                            <i class="fas fa-add"></i> Ajouter un nouveau foyer
-                        </a> </h5>
-                    </button>
 
     <div class="list-group">
         {% for foyer in foyers %}
@@ -337,7 +325,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
       <footer class="footer pt-3  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">

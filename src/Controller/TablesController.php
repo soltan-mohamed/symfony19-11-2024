@@ -51,11 +51,13 @@ class TablesController extends AbstractController
         }
         $foyers = $entityManager->getRepository(Foyer::class)->findAll();
 
-        return $this->render('tables.html.twig', [
+        return $this->render('ajoutfoyer.html.twig', [
             'form' => $form->createView(),
             'foyer' => $foyer,
             'foyers' => $foyers,
         ]);
+        return $this->redirectToRoute('app_tables');
+
     }
 
     #[Route('/tables/delete/{id}', name: 'foyer_delete', methods: ['POST'])]

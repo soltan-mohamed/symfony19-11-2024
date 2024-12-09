@@ -4,6 +4,8 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <img rel="apple-touch-icon" sizes="76x76" src="{{ asset('img\apple-icon.png') }}">
+  <img src="{{asset('img\favicon.png')}}" alt="Author picture" />
   <title> Gestion de Foyer </title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css" rel="stylesheet" />
@@ -43,9 +45,8 @@
             <span class="nav-link-text ms-1">Tableau de bord</span>
           </a>
         </li>
-
-                        <li class="nav-item">
-          <a class="nav-link active " href={{path('app_create_foyer')}}>
+                                <li class="nav-item">
+          <a class="nav-link  " href={{path('app_create_foyer')}}>
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="fas fa-add text-dark text-sm opacity-10"></i>
             </div>
@@ -60,10 +61,8 @@
             <span class="nav-link-text ms-1">Liste des foyers</span>
           </a>
         </li>
-
-
                 <li class="nav-item">
-          <a class="nav-link  " href={{path('app_create_chambre')}}>
+          <a class="nav-link active " href={{path('app_create_chambre')}}>
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="fas fa-add text-dark text-sm opacity-10"></i>
             </div>
@@ -108,7 +107,6 @@
         </li>
       </ul>
     </div>
-
   </aside>
   <main class="main-content position-relative border-radius-lg ">
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
@@ -116,8 +114,6 @@
 
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-
-
 
           </div>
           <ul class="navbar-nav  justify-content-end">
@@ -196,115 +192,100 @@
         <div class="col-12">
           <div class="card mb-4">
 
-            <div class="card-body px-0 pt-0 pb-2">
 
-
-
-{% block create %}
 <div class="container-fluid py-4 d-flex justify-content-center">
   <div class="row w-100">
     <div class="col-lg-10 mx-auto" style="max-width: 80%;">
       <div class="card shadow-lg">
         <div class="card-header bg-primary text-white text-center">
           <h3>
-            <i class="fas fa-plus-circle me-2"></i>Créer un nouveau foyer
+            <i class="fas fa-plus-circle me-2"></i>Créer une nouvelle chambre
           </h3>
         </div>
-
         <div class="card-body">
-          {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+{% block create %}
+  {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      {{ form_row(form.numero, {
+        'label_attr': {'class': 'form-label fw-bold'},
+        'attr': {'class': 'form-control'}
+      }) }}
+    </div>
+    <div class="col-md-6 mb-3">
+      {{ form_row(form.capacite, {
+        'label_attr': {'class': 'form-label fw-bold'},
+        'attr': {'class': 'form-control'}
+      }) }}
+    </div>
+  </div>
+  <div class="mb-3">
+    {{ form_row(form.foyer, {
+      'label_attr': {'class': 'form-label fw-bold'},
+      'attr': {'class': 'form-control'}
+    }) }}
+  </div>
+  
+  <div class="mb-3">
+    {{ form_row(form.etat, {
+      'label_attr': {'class': 'form-label fw-bold'},
+      'attr': {'class': 'form-control'}
+    }) }}
+  </div>
 
-          <div class="mb-3">
-            {{ form_row(form.nom, {
-              'label_attr': {'class': 'form-label fw-bold'},
-              'attr': {'class': 'form-control'}
-            }) }}
-          </div>
-
-          <div class="mb-3">
-            {{ form_row(form.adresse, {
-              'label_attr': {'class': 'form-label fw-bold'},
-              'attr': {'class': 'form-control'}
-            }) }}
-          </div>
-
-          <div class="mb-3">
-            {{ form_row(form.genre, {
-              'label_attr': {'class': 'form-label fw-bold'},
-              'attr': {'class': 'form-check'}
-            }) }}
-          </div>
-
-          <div class="mb-3">
-            {{ form_row(form.gouvernorat, {
-              'label_attr': {'class': 'form-label fw-bold'},
-              'attr': {'class': 'form-control'}
-            }) }}
-          </div>
-
-          <div class="mb-3">
-            {{ form_row(form.capacite, {
-              'label_attr': {'class': 'form-label fw-bold'},
-              'attr': {'class': 'form-control'}
-            }) }}
-          </div>
+  <div class="mb-3">
+    {{ form_row(form.typeLit, {
+      'label_attr': {'class': 'form-label fw-bold'},
+      'attr': {'class': 'form-control'}
+    }) }}
+  </div>
 
           <div class="text-center">
             {{ form_row(form.save, {
               'attr': {'class': 'btn btn-success btn-lg'}
             }) }}
           </div>
-
-          {{ form_end(form) }}
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+  {{ form_end(form) }}
 {% endblock %}
 
 
 
 
-
-
-            
-          </div>
         </div>
       </div>
-    <!--  <div class="row">
-        <div class="col-12">
-          <div class="card mb-4">
-
-            <div class="card-body px-0 pt-0 pb-2">
+    </div>
+  </div>
+</div>
 
 
-{% block show %}
+
+           <!-- <div class="card-body px-0 pt-0 pb-2">
+
+{% block body %}
 <div class="container mt-4">
     <h2 class="text-center text-primary mb-4">
-        <i class="bi bi-house-door"></i> Foyers Existants
+        <i class="bi bi-door-open"></i> Chambres Existantes
     </h2>
 
     <div class="list-group">
-        {% for foyer in foyers %}
+        {% for chambre in chambres %}
             <div class="list-group-item d-flex justify-content-between align-items-center shadow-sm p-3 mb-3 rounded">
                 <div>
-                    <p class="mb-0"><strong>Nom :</strong> {{ foyer.nom }}</p>
-                    <p class="mb-0"><strong>Adresse :</strong> {{ foyer.adresse }}</p>
-                    <p class="mb-0"><strong>Genre :</strong> {{ foyer.genre }}</p>
-                    <p class="mb-0"><strong>Gouvernorat :</strong> {{ foyer.gouvernorat }}</p>
-                    <p class="mb-0"><strong>Capacité :</strong> {{ foyer.capacite }}</p>
+                    <p class="mb-0"><strong>Numéro :</strong> {{ chambre.numero }}</p>
+                    <p class="mb-0"><strong>Capacité :</strong> {{ chambre.capacite }} personne(s)</p>
+                    <p class="mb-0"><strong>État :</strong> {{ chambre.etat }}</p>
+                    <p class="mb-0"><strong>Type de Lit :</strong> {{ chambre.typeLit }}</p>
                 </div>
 
                 <div class="d-flex">
                     <button type="submit" class="btn btn-edit">
-                        <a href="{{ path('app_tables_edit', {'id': foyer.id}) }}" style="color: #FB6340;">
+                        <a href="{{ path('app_test_edit', {'id': chambre.id}) }}" style="color: #FB6340;">
                             <i class="fas fa-edit"></i> Éditer
                         </a>
                     </button>
-                
-                    <form action="{{ path('foyer_delete', {'id': foyer.id}) }}" method="POST" style="margin: 0;" onsubmit="return confirmDelete()">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ foyer.id) }}">
+
+                    <form action="{{ path('test_delete', {'id': chambre.id}) }}" method="POST" style="margin: 0;"onsubmit="return confirmDelete()">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ chambre.id) }}">
                         <button type="submit" class="btn btn-danger">
                             <i class="fas fa-trash-alt"></i> Supprimer
                         </button>
@@ -312,7 +293,7 @@
                 </div>
             </div>
         {% else %}
-            <p class="text-muted">Aucun foyer disponible.</p>
+            <p class="text-muted">Aucune chambre disponible.</p>
         {% endfor %}
     </div>
 </div>
@@ -323,9 +304,6 @@
         return confirm("Êtes-vous sûr de vouloir supprimer ce foyer ? Cette action est irréversible.");
     }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 
 
 
@@ -348,7 +326,6 @@
                 <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Mohamed Soltan</a>
               </div>
             </div>
-
           </div>
         </div>
       </footer>

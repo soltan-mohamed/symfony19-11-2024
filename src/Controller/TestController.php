@@ -54,6 +54,8 @@ class TestController extends AbstractController
             'foyers' => $foyers,
         ]);
         $form->handleRequest($request);
+        return $this->redirectToRoute('app_create_chambre');
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();

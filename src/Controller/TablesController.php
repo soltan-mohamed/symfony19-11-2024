@@ -26,7 +26,7 @@ class TablesController extends AbstractController
             return $this->redirectToRoute('app_tables');
         }
     
-        $searchTerm = $request->query->get('search', ''); // Récupère la valeur du champ de recherche
+        $searchTerm = $request->query->get('search', '');
         $foyers = $searchTerm 
             ? $entityManager->getRepository(Foyer::class)->searchByName($searchTerm) 
             : $entityManager->getRepository(Foyer::class)->findAll();
@@ -34,7 +34,7 @@ class TablesController extends AbstractController
         return $this->render('tables.html.twig', [
             'form' => $form->createView(),
             'foyers' => $foyers,
-            'searchTerm' => $searchTerm, // Pour réafficher la recherche
+            'searchTerm' => $searchTerm,
         ]);
     }
 

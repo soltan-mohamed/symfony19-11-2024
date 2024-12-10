@@ -47,7 +47,7 @@
                         <li class="nav-item">
           <a class="nav-link active " href={{path('app_create_foyer')}}>
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                    <i class="fas fa-add text-dark text-sm opacity-10"></i>
+                    <i class="fas fa-plus-circle text-dark text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Créer un nouveau foyer</span>
           </a>
@@ -65,7 +65,7 @@
                 <li class="nav-item">
           <a class="nav-link  " href={{path('app_create_chambre')}}>
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                    <i class="fas fa-add text-dark text-sm opacity-10"></i>
+                    <i class="fas fa-plus-circle text-dark text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Créer une nouvelle chambre</span>
           </a>
@@ -287,70 +287,7 @@
         
       </div>
       
-    <!--  <div class="row">
-        <div class="col-12">
-          <div class="card mb-4">
 
-            <div class="card-body px-0 pt-0 pb-2">
-
-
-{% block show %}
-<div class="container mt-4">
-    <h2 class="text-center text-primary mb-4">
-        <i class="bi bi-house-door"></i> Foyers Existants
-    </h2>
-
-    <div class="list-group">
-        {% for foyer in foyers %}
-            <div class="list-group-item d-flex justify-content-between align-items-center shadow-sm p-3 mb-3 rounded">
-                <div>
-                    <p class="mb-0"><strong>Nom :</strong> {{ foyer.nom }}</p>
-                    <p class="mb-0"><strong>Adresse :</strong> {{ foyer.adresse }}</p>
-                    <p class="mb-0"><strong>Genre :</strong> {{ foyer.genre }}</p>
-                    <p class="mb-0"><strong>Gouvernorat :</strong> {{ foyer.gouvernorat }}</p>
-                    <p class="mb-0"><strong>Capacité :</strong> {{ foyer.capacite }}</p>
-                </div>
-
-                <div class="d-flex">
-                    <button type="submit" class="btn btn-edit">
-                        <a href="{{ path('app_tables_edit', {'id': foyer.id}) }}" style="color: #FB6340;">
-                            <i class="fas fa-edit"></i> Éditer
-                        </a>
-                    </button>
-                
-                    <form action="{{ path('foyer_delete', {'id': foyer.id}) }}" method="POST" style="margin: 0;" onsubmit="return confirmDelete()">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ foyer.id) }}">
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fas fa-trash-alt"></i> Supprimer
-                        </button>
-                    </form>
-                </div>
-            </div>
-        {% else %}
-            <p class="text-muted">Aucun foyer disponible.</p>
-        {% endfor %}
-    </div>
-</div>
-{% endblock %}
-
-<script>
-    function confirmDelete() {
-        return confirm("Êtes-vous sûr de vouloir supprimer ce foyer ? Cette action est irréversible.");
-    }
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
-
-
-
-
-
-            </div>
-          </div>
-        </div>
-      </div>-->
       <footer class="footer pt-3  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">

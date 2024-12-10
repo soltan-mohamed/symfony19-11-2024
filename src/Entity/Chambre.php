@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Entity;
 
 use App\Repository\ChambreRepository;
@@ -7,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use App\Entity\Foyer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ChambreRepository::class)]
 class Chambre
@@ -16,7 +16,12 @@ class Chambre
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(type: 'string', length: 55)]
+    #[Assert\NotBlank(message: "Le numéro de chambre ne peut pas être vide.")]
+    #[Assert\Regex(
+        pattern: "/^[^a-zA-Z\W]/",
+        message: "Le numéro de chambre ne doit pas commencer par une lettre ou un symbole."
+    )]
     private $numero;
 
     #[ORM\Column(type: "integer")]

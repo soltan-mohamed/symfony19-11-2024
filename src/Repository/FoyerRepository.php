@@ -18,7 +18,7 @@ class FoyerRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('f');
     
-        if ($nom && $nom !== '') { // Vérifie si $nom n'est pas null ou vide
+        if ($nom && $nom !== '') { 
             $qb->where('f.nom LIKE :nom')
                ->setParameter('nom', '%' . $nom . '%');
         }

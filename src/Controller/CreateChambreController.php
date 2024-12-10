@@ -20,9 +20,8 @@ class CreateChambreController extends AbstractController
     #[Route('/create/chambre', name: 'app_create_chambre')]
     public function index(Request $request, ChambreRepository $chambreRepository, EntityManagerInterface $entityManager): Response
     {
-        $searchTerm = $request->query->get('search'); // Récupérer le terme de recherche
+        $searchTerm = $request->query->get('search');
     
-        // Utiliser la méthode du repository pour effectuer la recherche
         $chambres = $chambreRepository->searchByNumero($searchTerm);
     
         $chambre = new Chambre();
@@ -35,13 +34,15 @@ class CreateChambreController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($chambre);
             $entityManager->flush();
-            return $this->redirectToRoute('app_test');
+            $this->addFlash('success', 'La chambre a été créée avec succès !');
+
+            return $this->redirectToRoute('app_create_chambre');
         }
     
         return $this->render('ajoutchambre.html.twig', [
             'chambres' => $chambres,
             'form' => $form->createView(),
-            'searchTerm' => $searchTerm, // Passer le terme de recherche au template
+            'searchTerm' => $searchTerm,
         ]);
     }
 }

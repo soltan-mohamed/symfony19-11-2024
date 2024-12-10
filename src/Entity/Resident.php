@@ -19,7 +19,6 @@ class Resident extends Etudiant
     #[ORM\Column(type: 'date', nullable: true)]
     private $dateSortie;
 
-    // Getters et setters
 
     public function getFoyer(): ?Foyer
     {

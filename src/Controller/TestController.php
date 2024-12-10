@@ -20,9 +20,8 @@ class TestController extends AbstractController
     #[Route('/test', name: 'app_test')]
     public function index(Request $request, ChambreRepository $chambreRepository, EntityManagerInterface $entityManager): Response
     {
-        $searchTerm = $request->query->get('search'); // Récupérer le terme de recherche
+        $searchTerm = $request->query->get('search');
     
-        // Utiliser la méthode du repository pour effectuer la recherche
         $chambres = $chambreRepository->searchByNumero($searchTerm);
     
         $chambre = new Chambre();
@@ -41,7 +40,7 @@ class TestController extends AbstractController
         return $this->render('billing.html.twig', [
             'chambres' => $chambres,
             'form' => $form->createView(),
-            'searchTerm' => $searchTerm, // Passer le terme de recherche au template
+            'searchTerm' => $searchTerm,
         ]);
     }
 
@@ -54,30 +53,33 @@ class TestController extends AbstractController
             'foyers' => $foyers,
         ]);
         $form->handleRequest($request);
-        return $this->redirectToRoute('app_create_chambre');
 
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+            $this->addFlash('modifier', 'La chambre a été modifiée avec succès !');
+            return $this->redirectToRoute('app_create_chambre');
+        }
 
-            return $this->render('billing.html.twig', [
+            return $this->render('ajoutchambre.html.twig', [
                 'chambres' => $chambres,
                 'form' => $form->createView(),
 
             ]);
 
-        }
+        
 
         $chambres = $entityManager->getRepository(Chambre::class)->findAll();
         $foyers = $entityManager->getRepository(Foyer::class)->findAll();
 
-        return $this->render('billing.html.twig', [
+        return $this->render('ajoutchambre.html.twig', [
             'form' => $form->createView(),
             'foyers' => $foyers,
             'chambre' => $chambre,
             'chambres' => $chambres,
         ]);
     }
+
 
     #[Route('/test/{id}/delete', name: 'test_delete', methods: ['POST'])]
     public function delete(Request $request, Chambre $chambre, EntityManagerInterface $entityManager): Response

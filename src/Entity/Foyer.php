@@ -15,14 +15,14 @@ class Foyer
     #[ORM\Column(type: "integer")]
     private $id;
 
-    #[ORM\Column(type: "string", length: 70)]
+    #[ORM\Column(type: "string", length: 75)]
     #[Assert\NotBlank(message: "Le nom ne peut pas être vide.")]
     #[Assert\Regex(
-        pattern: "/^[A-Za-z]/", // Vérifie que le nom commence par une lettre
+        pattern: "/^[A-Za-z]/",
         message: "Le nom doit commencer par une lettre, pas un chiffre."
     )]
     #[Assert\Regex(
-        pattern: "/^[^\W\d]/", // Vérifie que le nom ne commence pas par un symbole ou un chiffre
+        pattern: "/^[^\W\d]/",
         message: "Le nom ne doit pas commencer par un symbole."
     )]
     private $nom;

@@ -29,7 +29,6 @@ class CreateFoyerController extends AbstractController
             return $this->redirectToRoute('app_create_foyer');
         }
     
-        // Récupération de la recherche
         $searchTerm = $request->query->get('search', ''); 
         $foyers = $searchTerm 
             ? $entityManager->getRepository(Foyer::class)->searchByName($searchTerm) 

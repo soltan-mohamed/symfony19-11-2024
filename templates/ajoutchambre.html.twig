@@ -48,7 +48,7 @@
                                 <li class="nav-item">
           <a class="nav-link  " href={{path('app_create_foyer')}}>
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                    <i class="fas fa-add text-dark text-sm opacity-10"></i>
+                    <i class="fas fa-plus-circle text-dark text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Créer un nouveau foyer</span>
           </a>
@@ -64,7 +64,7 @@
                 <li class="nav-item">
           <a class="nav-link active " href={{path('app_create_chambre')}}>
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                    <i class="fas fa-add text-dark text-sm opacity-10"></i>
+                    <i class="fas fa-plus-circle text-dark text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Créer une nouvelle chambre</span>
           </a>
@@ -204,38 +204,44 @@
         </div>
         <div class="card-body">
 {% block create %}
+                  {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+              {{ message }}
+            </div>
+          {% endfor %}
+
+                                {% for message in app.flashes('modifier') %}
+            <div class="alert alert-success">
+              {{ message }}
+            </div>
+          {% endfor %}
   {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
   <div class="row">
     <div class="col-md-6 mb-3">
       {{ form_row(form.numero, {
-        'label_attr': {'class': 'form-label fw-bold'},
         'attr': {'class': 'form-control'}
       }) }}
     </div>
     <div class="col-md-6 mb-3">
       {{ form_row(form.capacite, {
-        'label_attr': {'class': 'form-label fw-bold'},
         'attr': {'class': 'form-control'}
       }) }}
     </div>
   </div>
   <div class="mb-3">
     {{ form_row(form.foyer, {
-      'label_attr': {'class': 'form-label fw-bold'},
       'attr': {'class': 'form-control'}
     }) }}
   </div>
   
   <div class="mb-3">
     {{ form_row(form.etat, {
-      'label_attr': {'class': 'form-label fw-bold'},
       'attr': {'class': 'form-control'}
     }) }}
   </div>
 
   <div class="mb-3">
     {{ form_row(form.typeLit, {
-      'label_attr': {'class': 'form-label fw-bold'},
       'attr': {'class': 'form-control'}
     }) }}
   </div>
@@ -266,61 +272,7 @@
                         </a> </h5>
                     </button>
 
-           <!-- <div class="card-body px-0 pt-0 pb-2">
 
-{% block body %}
-<div class="container mt-4">
-    <h2 class="text-center text-primary mb-4">
-        <i class="bi bi-door-open"></i> Chambres Existantes
-    </h2>
-
-    <div class="list-group">
-        {% for chambre in chambres %}
-            <div class="list-group-item d-flex justify-content-between align-items-center shadow-sm p-3 mb-3 rounded">
-                <div>
-                    <p class="mb-0"><strong>Numéro :</strong> {{ chambre.numero }}</p>
-                    <p class="mb-0"><strong>Capacité :</strong> {{ chambre.capacite }} personne(s)</p>
-                    <p class="mb-0"><strong>État :</strong> {{ chambre.etat }}</p>
-                    <p class="mb-0"><strong>Type de Lit :</strong> {{ chambre.typeLit }}</p>
-                </div>
-
-                <div class="d-flex">
-                    <button type="submit" class="btn btn-edit">
-                        <a href="{{ path('app_test_edit', {'id': chambre.id}) }}" style="color: #FB6340;">
-                            <i class="fas fa-edit"></i> Éditer
-                        </a>
-                    </button>
-
-                    <form action="{{ path('test_delete', {'id': chambre.id}) }}" method="POST" style="margin: 0;"onsubmit="return confirmDelete()">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ chambre.id) }}">
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fas fa-trash-alt"></i> Supprimer
-                        </button>
-                    </form>
-                </div>
-            </div>
-        {% else %}
-            <p class="text-muted">Aucune chambre disponible.</p>
-        {% endfor %}
-    </div>
-</div>
-{% endblock %}
-
-<script>
-    function confirmDelete() {
-        return confirm("Êtes-vous sûr de vouloir supprimer ce foyer ? Cette action est irréversible.");
-    }
-</script>
-
-
-
-
-
-
-            </div>
-          </div>
-        </div>
-      </div>-->
       <footer class="footer pt-3  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">

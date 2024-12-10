@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Entity;
 
 use App\Repository\FoyerRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: FoyerRepository::class)]
 class Foyer
@@ -16,9 +16,19 @@ class Foyer
     private $id;
 
     #[ORM\Column(type: "string", length: 70)]
+    #[Assert\NotBlank(message: "Le nom ne peut pas être vide.")]
+    #[Assert\Regex(
+        pattern: "/^[A-Za-z]/", // Vérifie que le nom commence par une lettre
+        message: "Le nom doit commencer par une lettre, pas un chiffre."
+    )]
+    #[Assert\Regex(
+        pattern: "/^[^\W\d]/", // Vérifie que le nom ne commence pas par un symbole ou un chiffre
+        message: "Le nom ne doit pas commencer par un symbole."
+    )]
     private $nom;
 
-    #[ORM\Column(type: "string", length: 255)]
+    #[ORM\Column(type: "string", length: 250)]
+    #[Assert\NotBlank(message: "L'adresse ne peut pas être vide.")]
     private $adresse;
 
     #[ORM\OneToMany(mappedBy: "foyer", targetEntity: Chambre::class)]
@@ -28,9 +38,11 @@ class Foyer
     private $residents;
 
     #[ORM\Column(type: "string", length: 10)]
+    #[Assert\NotBlank(message: "Le genre ne peut pas être vide.")]
     private $genre;
 
     #[ORM\Column(type: "string", length: 50)]
+    #[Assert\NotBlank(message: "Le gouvernorat ne peut pas être vide.")]
     private $gouvernorat;
 
     #[ORM\Column(type: "integer")]

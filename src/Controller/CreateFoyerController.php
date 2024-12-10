@@ -23,6 +23,8 @@ class CreateFoyerController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($foyer);
             $entityManager->flush();
+            $this->addFlash('success', 'Le foyer a été créé avec succès !');
+
     
             return $this->redirectToRoute('app_create_foyer');
         }

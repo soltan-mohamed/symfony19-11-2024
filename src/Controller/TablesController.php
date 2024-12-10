@@ -46,8 +46,10 @@ class TablesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+            $this->addFlash('modifier', 'Le foyer a été modifié avec succès !');
 
-            return $this->redirectToRoute('app_tables');
+
+            return $this->redirectToRoute('app_create_foyer');
         }
         $foyers = $entityManager->getRepository(Foyer::class)->findAll();
 
@@ -56,7 +58,6 @@ class TablesController extends AbstractController
             'foyer' => $foyer,
             'foyers' => $foyers,
         ]);
-        return $this->redirectToRoute('app_tables');
 
     }
 

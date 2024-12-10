@@ -212,39 +212,45 @@
         </div>
 
         <div class="card-body">
-          {{ form_start(form, {'attr': {'class': 'needs-validation'}}) }}
+                  {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+              {{ message }}
+            </div>
+          {% endfor %}
+
+                                {% for message in app.flashes('modifier') %}
+            <div class="alert alert-success">
+              {{ message }}
+            </div>
+          {% endfor %}
+          {{ form_start(form) }}
 
           <div class="mb-3">
             {{ form_row(form.nom, {
-              'label_attr': {'class': 'form-label fw-bold'},
               'attr': {'class': 'form-control'}
             }) }}
           </div>
 
           <div class="mb-3">
             {{ form_row(form.adresse, {
-              'label_attr': {'class': 'form-label fw-bold'},
               'attr': {'class': 'form-control'}
             }) }}
           </div>
 
           <div class="mb-3">
             {{ form_row(form.genre, {
-              'label_attr': {'class': 'form-label fw-bold'},
               'attr': {'class': 'form-check'}
             }) }}
           </div>
 
           <div class="mb-3">
             {{ form_row(form.gouvernorat, {
-              'label_attr': {'class': 'form-label fw-bold'},
               'attr': {'class': 'form-control'}
             }) }}
           </div>
 
           <div class="mb-3">
             {{ form_row(form.capacite, {
-              'label_attr': {'class': 'form-label fw-bold'},
               'attr': {'class': 'form-control'}
             }) }}
           </div>
@@ -262,6 +268,8 @@
   </div>
 </div>
 {% endblock %}
+
+
 
 
 

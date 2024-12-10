@@ -24,10 +24,11 @@ class CreateFoyerController extends AbstractController
             $entityManager->persist($foyer);
             $entityManager->flush();
     
-            return $this->redirectToRoute('app_tables');
+            return $this->redirectToRoute('app_create_foyer');
         }
     
-        $searchTerm = $request->query->get('search', ''); // Récupère la valeur du champ de recherche
+        // Récupération de la recherche
+        $searchTerm = $request->query->get('search', ''); 
         $foyers = $searchTerm 
             ? $entityManager->getRepository(Foyer::class)->searchByName($searchTerm) 
             : $entityManager->getRepository(Foyer::class)->findAll();
@@ -35,7 +36,7 @@ class CreateFoyerController extends AbstractController
         return $this->render('ajoutfoyer.html.twig', [
             'form' => $form->createView(),
             'foyers' => $foyers,
-            'searchTerm' => $searchTerm, // Pour réafficher la recherche
+            'searchTerm' => $searchTerm, 
         ]);
     }
 }

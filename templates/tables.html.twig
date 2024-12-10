@@ -118,12 +118,27 @@
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
 <form method="get" action="{{ path('app_tables') }}" class="mb-4">
     <div class="input-group">
-        <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-        <input type="text" class="form-control" placeholder="tapez ici..." 
-               name="search" value="{{ searchTerm|default('') }}">
-        <button type="submit" class="btn btn-primary">Rechercher</button>
+            <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+
+        <input 
+            type="text" 
+            class="form-control" 
+            placeholder="Recherchez un foyer..." 
+            name="search" 
+            value="{{ searchTerm|default('') }}" 
+            id="searchField" 
+            oninput="this.form.submit()"
+            autofocus
+        >
     </div>
 </form>
+
+
+
+
+
+
+
 
 
           </div>
@@ -291,11 +306,26 @@
     <h2 class="text-center text-primary mb-4">
         <i class="bi bi-house-door"></i> Foyers Existants
     </h2>
-                        <button type="submit" class="btn btn-add">
-                      <h5>  <a href="{{ path('app_create_foyer') }}" style="color: green;">
-                            <i class="fas fa-add"></i> Ajouter un nouveau foyer
-                        </a> </h5>
-                    </button>
+<button type="submit" class="btn btn-add">
+    <h5>
+        <a href="{{ path('app_create_foyer') }}" class="btn-link" style="color: green;">
+            <i class="fas fa-plus-circle"></i> Ajouter un nouveau foyer
+        </a>
+    </h5>
+</button>
+
+
+
+
+                    <button type="submit" class="btn btn-add">
+    <h5>
+        <a href="{{ path('app_create_chambre') }}" class="btn-link" style="color: green;">
+            <i class="fas fa-plus-circle"></i> Ajouter une nouvelle chambre
+        </a>
+    </h5>
+</button>
+
+
 
     <div class="list-group">
         {% for foyer in foyers %}

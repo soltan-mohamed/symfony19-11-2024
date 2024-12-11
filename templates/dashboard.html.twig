@@ -257,13 +257,13 @@
                                 <span class="badge bg-warning text-dark">En attente</span>
                                 <p>Demande № : {{ demande.id }}</p>
                             {% elseif demande.getStatut() == 'accepted' %}
-                                <span class="badge bg-success">Acceptée</span>
-                                <p>Demande № : {{ demande.id }}</p> 
+                                
+                                <p>Demande № : {{ demande.id }} <span class="badge bg-success">Acceptée</span></p> 
                             {% elseif demande.getStatut() == 'rejected' %}
                                 <span class="badge bg-danger">Rejeté</span>
                                 <p>ID de la demande : {{ demande.id }}</p>
                             {% else %}
-                            <p> Demande № : {{ demande.id }}</p>
+                            <p> Demande № : {{ demande.id }} est en attente</p>
                             {% endif %}
                         {% else %}
                             <span class="badge bg-secondary">Pas de demande</span>
@@ -279,7 +279,6 @@
                                     <button type="submit" class="btn btn-success btn-sm">Accepter</button>
                                 </form>
                             {% elseif demande.getStatut() == 'accepted' %}
-                                <span class="text-success">Demande acceptée</span>
                             {% elseif demande.getStatut() == 'rejected' %}
                                 <span class="text-danger">Demande déjà rejetée</span>
                             {% endif %}

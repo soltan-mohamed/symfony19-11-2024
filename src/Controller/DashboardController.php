@@ -128,7 +128,11 @@ class DashboardController extends AbstractController
             return $this->redirectToRoute('dashboard');
         }
     
-        $this->addFlash('success', 'Demande acceptée.');
+        if ($demande->getStatut() !== 'accepted') {
+            $demande->setStatut('accepted'); // Mettre à jour le statut
+            $entityManager->flush();
+            $this->addFlash('ok', 'Demande acceptée.');
+        }
     
         return $this->redirectToRoute('dashboard');
     }

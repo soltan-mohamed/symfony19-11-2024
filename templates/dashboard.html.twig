@@ -202,6 +202,11 @@
               {{ message }}
             </div>
           {% endfor %}
+                            {% for message in app.flashes('ok') %}
+            <div class="alert alert-success">
+              {{ message }}
+            </div>
+          {% endfor %}
     <h2 class="text-center text-primary mb-4">
         <i class="bi bi-house-door"></i> Gestion des Sélections des Utilisateurs
     </h2>
@@ -250,15 +255,15 @@
 
                             {% if demande.getStatut() == 'pending' %}
                                 <span class="badge bg-warning text-dark">En attente</span>
-                                <p>ID de la demande : {{ demande.id }}</p>
+                                <p>Demande № : {{ demande.id }}</p>
                             {% elseif demande.getStatut() == 'accepted' %}
-                                <span class="badge bg-success">Accepté</span>
-                                <p>ID de la demande : {{ demande.id }}</p> 
+                                <span class="badge bg-success">Acceptée</span>
+                                <p>Demande № : {{ demande.id }}</p> 
                             {% elseif demande.getStatut() == 'rejected' %}
                                 <span class="badge bg-danger">Rejeté</span>
                                 <p>ID de la demande : {{ demande.id }}</p>
                             {% else %}
-                                <p>ID de la demande : {{ demande.id }}</p>
+                            <p> Demande № : {{ demande.id }}</p>
                             {% endif %}
                         {% else %}
                             <span class="badge bg-secondary">Pas de demande</span>
@@ -269,12 +274,12 @@
                         {% if foyer.demandesSelection|length > 0 %}
                             {% set demande = foyer.demandesSelection[0] %}
 
-                            {% if demande.getStatut() == 'pending' %}
+                            {% if demande.getStatut() == 'En attente' %}
                                 <form action="{{ path('dashboard_accepter_demande', { id: demande.id }) }}" method="POST" style="display:inline;">
                                     <button type="submit" class="btn btn-success btn-sm">Accepter</button>
                                 </form>
                             {% elseif demande.getStatut() == 'accepted' %}
-                                <span class="text-success">Demande déjà acceptée</span>
+                                <span class="text-success">Demande acceptée</span>
                             {% elseif demande.getStatut() == 'rejected' %}
                                 <span class="text-danger">Demande déjà rejetée</span>
                             {% endif %}

@@ -5,61 +5,127 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foyers et Chambres</title>
     <style>
+        /* Appliquer un arrière-plan avec une légère opacité */
         body {
             font-family: Arial, sans-serif;
             font-size: 12px;
             margin: 20px;
+            background-image: url('{{ asset('img/background-image.jpg') }}'); /* Utiliser l'image depuis le répertoire public */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            opacity: 0.9; /* Contrôle l'opacité de l'ensemble */
         }
+
+        /* En-tête */
+        h1 {
+            color: #004d99; /* Une couleur bleue pour le titre */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #007bff; /* Une couleur bleue pour les sous-titres */
+        }
+
+        /* Ajouter un logo dans l'en-tête */
+        .logo {
+            width: 120px;
+            height: auto;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        /* Style de tableau */
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
+            background-color: rgba(255, 255, 255, 0.8); /* Ajouter un fond blanc semi-transparent */
+            border-radius: 10px;
         }
+
         table, th, td {
-            border: 1px solid black;
+            border: 1px solid #ddd;
         }
+
         th, td {
-            padding: 8px;
+            padding: 10px;
             text-align: left;
         }
+
         th {
             background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Style des badges d'état */
+        .badge {
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            color: white;
+        }
+
+        .badge-warning {
+            background-color: #ffcc00;
+        }
+
+        .badge-success {
+            background-color: #28a745;
+        }
+
+        .badge-danger {
+            background-color: #dc3545;
+        }
+
+        /* Mise en page */
+        .content {
+            margin-top: 30px;
+            padding: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Liste des Foyers et Chambres</h1>
-    {% for foyer in foyers %}
-        <h2>Foyer: {{ foyer.nom }}</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Numéro de la Chambre</th>
-                    <th>Capacité de la chambre</th>
-                    <th>Etat de la chambre</th>
-                    <th>Type de lit dans la chambre</th>
+        <img src="{{ imagePath }}" alt="Logo" class= "logo">
 
-                </tr>
-            </thead>
-            <tbody>
-                {% for chambre in foyer.chambres %}
+    <div class="content">
+        <h1>Liste des Foyers et Chambres</h1>
+        
+        {% for foyer in foyers %}
+            <h2>Foyer: {{ foyer.nom }}</h2>
+            <table>
+                <thead>
                     <tr>
-                        <td>{{ chambre.numero }}</td>
-                        <td>{{ chambre.capacite }}</td>
-                        <td>{{ chambre.etat }}</td>
-                        <td>{{ chambre.typeLit }}</td>
-
-
+                        <th>Numéro de la Chambre</th>
+                        <th>Capacité de la chambre</th>
+                        <th>Etat de la chambre</th>
+                        <th>Type de lit dans la chambre</th>
                     </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="3">Aucune chambre trouvée pour ce foyer.</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>Aucun foyer trouvé.</p>
-    {% endfor %}
+                </thead>
+                <tbody>
+                    {% for chambre in foyer.chambres %}
+                        <tr>
+                            <td>{{ chambre.numero }}</td>
+                            <td>{{ chambre.capacite }}</td>
+                            <td>{{ chambre.etat }}</td>
+                            <td>{{ chambre.typeLit }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4">Aucune chambre trouvée pour ce foyer.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Aucun foyer trouvé.</p>
+        {% endfor %}
+    </div>
 </body>
 </html>

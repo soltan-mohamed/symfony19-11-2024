@@ -15,7 +15,7 @@ class Foyer
     #[ORM\Column(type: "integer")]
     private $id;
 
-    #[ORM\Column(type: "string", length: 75)]
+    #[ORM\Column(type: "string", length: 70)]
     #[Assert\NotBlank(message: "Le nom ne peut pas être vide.")]
     #[Assert\Regex(
         pattern: "/^[A-Za-z]/",
@@ -50,10 +50,17 @@ class Foyer
     #[Assert\GreaterThan(value: 0, message: "La capacité doit être supérieure à 0.")]
     private $capacite;
 
+    #[ORM\Column(type: "string", length: 20, nullable: true)]
+    private $status;
+
+    #[ORM\OneToMany(mappedBy: "foyer", targetEntity: DemandeSelection::class)]
+    private $demandesSelection; 
+
     public function __construct()
     {
         $this->chambres = new ArrayCollection();
         $this->residents = new ArrayCollection();
+        $this->demandesSelection = new ArrayCollection();
     }
 
     public function getNom(): ?string
@@ -124,6 +131,22 @@ class Foyer
     {
         $this->capacite = $capacite;
         return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): self
+    {
+        $this->status = $status;
+        return $this;
+    }
+
+    public function getDemandesSelection(): Collection
+    {
+        return $this->demandesSelection;
     }
 
     public function __toString(): string

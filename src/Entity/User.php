@@ -116,33 +116,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
     }
 
     public function getRoles(): array
     {
-        // In this example, every user has the ROLE_USER by default
         return ['ROLE_USER'];
     }
 
     public function getUserIdentifier(): string
     {
-        // Return the identifier for the user, typically the email
         return $this->email;
     }
 
-// Dans l'entité User
 
 #[ORM\OneToMany(mappedBy: 'user', targetEntity: ResetPasswordRequest::class)]
 private Collection $resetPasswordRequests;
 
-// Constructeur pour initialiser la collection
 public function __construct()
 {
     $this->resetPasswordRequests = new ArrayCollection();
 }
 
-// Getter pour la collection
 public function getResetPasswordRequests(): Collection
 {
     return $this->resetPasswordRequests;

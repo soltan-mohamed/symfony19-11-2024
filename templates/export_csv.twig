@@ -1,0 +1,11 @@
+{# export_csv.twig #}
+Numéro de la Chambre,Capacité de la chambre,Etat de la chambre,Type de lit dans la chambre
+{% for foyer in foyers %}
+    {% for chambre in foyer.chambres %}
+        {{ chambre.numero }},{{ chambre.capacite }},{{ chambre.etat }},{{ chambre.typeLit }}
+    {% else %}
+        "Aucune chambre trouvée pour ce foyer."
+    {% endfor %}
+{% else %}
+    "Aucun foyer trouvé."
+{% endfor %}

@@ -1,0 +1,30 @@
+<table>
+    <thead>
+        <tr>
+            <th>Numéro de la Chambre</th>
+            <th>Capacité de la chambre</th>
+            <th>Etat de la chambre</th>
+            <th>Type de lit dans la chambre</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for foyer in foyers %}
+            {% for chambre in foyer.chambres %}
+                <tr>
+                    <td>{{ chambre.numero }}</td>
+                    <td>{{ chambre.capacite }}</td>
+                    <td>{{ chambre.etat }}</td>
+                    <td>{{ chambre.typeLit }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucune chambre trouvée pour ce foyer.</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun foyer trouvé.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
